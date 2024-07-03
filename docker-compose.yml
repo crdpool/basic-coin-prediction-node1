@@ -2,7 +2,7 @@ version: '3'
 
 services:
   inference:
-    container_name: inference-basic-eth-pred
+    container_name: inference-basic-sol-pred
     build:
       context: .
     command: python -u /app/app.py
@@ -14,7 +14,7 @@ services:
           - inference
         ipv4_address: 172.22.0.4
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/inference/ETH"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/inference/SOL"]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -22,7 +22,7 @@ services:
       - ./inference-data:/app/data
   
   updater:
-    container_name: updater-basic-eth-pred
+    container_name: updater-basic-sol-pred
     build: .
     environment:
       - INFERENCE_API_ADDRESS=http://inference:8000
@@ -43,7 +43,7 @@ services:
         ipv4_address: 172.22.0.5
   
   head:
-    container_name: head-basic-eth-pred
+    container_name: head-basic-sol-pred
     image: alloranetwork/allora-inference-base-head:latest
     environment:
       - HOME=/data
@@ -73,7 +73,7 @@ services:
         ipv4_address: 172.22.0.100
 
   worker:
-    container_name: worker-basic-eth-pred
+    container_name: worker-basic-sol-pred
     environment:
       - INFERENCE_API_ADDRESS=http://inference:8000
       - HOME=/data
