@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     networks:
-      eth-model-local:
+      sol-model-local:
         aliases:
           - inference
         ipv4_address: 172.22.0.4
@@ -37,7 +37,7 @@ services:
       inference:
         condition: service_healthy
     networks:
-      eth-model-local:
+      sol-model-local:
         aliases:
           - updater
         ipv4_address: 172.22.0.5
@@ -67,7 +67,7 @@ services:
       - ./head-data:/data
     working_dir: /data
     networks:
-      eth-model-local:
+      sol-model-local:
         aliases:
           - head
         ipv4_address: 172.22.0.100
@@ -103,7 +103,7 @@ services:
       - inference
       - head
     networks:
-      eth-model-local:
+      sol-model-local:
         aliases:
           - worker
         ipv4_address: 172.22.0.10
@@ -111,7 +111,7 @@ services:
 
   
 networks:
-  eth-model-local:
+  sol-model-local:
     driver: bridge
     ipam:
       config:
